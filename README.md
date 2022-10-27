@@ -1,5 +1,5 @@
-## Alfred workflow 开发脚本
-
+## Alfred workflow 开发脚本&配置
+> Alfred workflow应该很多人都非常喜欢，基本上极大提高了日常工作效率，但是关于 workflow script脚本的开发找了半天没有找到一篇非常清晰的文章，所以记录一下这一次摸索过程，帮助后人踩坑,当然这里的脚本不限于PHP，用其他语言也是同理
 ### 如何使用
 
 - `git pull https://github.com/weiwei2012holy/alfred`
@@ -20,7 +20,7 @@
    ![image](attachments/s2.png)
 3. 选中script filter打开设置
    ![image](attachments/s3.png)
-4. 配置脚本信息,keyword=触发关键字，注意4.*版本不能直接使用PHP解析器，需要用bash来触发
+4. 配置脚本信息,keyword=触发关键字，注意4.*版本不能直接使用PHP解析器，需要用bash来触发，`$1`表示输入的参数1，也可以用`$*`表示全部参数
    ![image](attachments/s4.png)
 5. 脚本开发,引入扩展包：https://www.alfredphpworkflows.com
    ,包定义好了各种JSON数据对应的方法，基本一看就会,当前教程脚本为`s2t.php`
