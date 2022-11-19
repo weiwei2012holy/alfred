@@ -11,11 +11,12 @@ use Alfred\Workflows\Workflow;
 
 $workflow = new Workflow();
 
+$input = implode(" ",$workflow->arguments());
 
-$input = $workflow->argument();
 if ($input == "") {
     $input = "now";
 }
+date_default_timezone_set('Asia/Shanghai');
 
 $res = "";
 if (is_numeric($input)) {
