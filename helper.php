@@ -64,9 +64,13 @@ class Random
         $leftSize = $this->length;
         $res = '';
         //先循环保证每个类型都有
+        shuffle($inputs);
         for ($i = 0; $i < count($inputs); $i++) {
             $res .= $inputs[$i][mt_rand(0, strlen($inputs[$i]) - 1)];
             $leftSize--;
+            if ($leftSize <= 0) {
+                return $res;
+            }
         }
         while ($leftSize > 0) {
             $rd = mt_rand();
