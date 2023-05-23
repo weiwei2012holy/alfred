@@ -16,35 +16,48 @@ $input = $workflow->arguments();
 
 $len = 16;
 
-if (isset($input[0])){
+if (isset($input[0])) {
     $len = $input[0];
 }
 
-$res = random($len);
+$tool = new Random($len);
+
+$res = $tool->random();
+$resUpper = strtoupper($tool->random());
+$resNumber = $tool->randomNumber();
+$resAll= $tool->randomAll();
+
 
 
 $workflow->item()
     ->title($res)
-    ->subtitle($len)
-//    ->icon('sp.png')
+    ->subtitle("字母+数字")
     ->copy($res)//在列表中使用 ⌘C 复制操作的值
     ->variable("data", $res);//设置变量后，Alfre可以通过{var:var_name}来获取，比如复制剪切板
+
+$workflow->item()
+    ->title($resUpper)
+    ->subtitle("大写字母+数字")
+    ->copy($resUpper)//在列表中使用 ⌘C 复制操作的值
+    ->variable("data", $resUpper);//设置变量后，Alfre可以通过{var:var_name}来获取，比如复制剪切板
+
+$workflow->item()
+    ->title($resNumber)
+    ->subtitle("纯数字")
+    ->copy($resNumber)//在列表中使用 ⌘C 复制操作的值
+    ->variable("data", $resNumber);//设置变量后，Alfre可以通过{var:var_name}来获取，比如复制剪切板
+
+$workflow->item()
+    ->title($resAll)
+    ->subtitle("字母+数字+特殊字符")
+    ->copy($resAll)//在列表中使用 ⌘C 复制操作的值
+    ->variable("data", $resAll);//设置变量后，Alfre可以通过{var:var_name}来获取，比如复制剪切板
 
 return $workflow->output();
 
 
 
-function random($length = 16)
-{
-    $string = '';
 
-    while (($len = strlen($string)) < $length) {
-        $size = $length - $len;
 
-        $bytes = random_bytes($size);
 
-        $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
-    }
 
-    return $string;
-}
