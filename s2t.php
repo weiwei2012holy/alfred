@@ -14,8 +14,9 @@ $workflow = new Workflow();
 $input = implode(" ", $workflow->arguments());
 
 
+$defaultInout = 'now';
 if ($input == "") {
-    $input = "now";
+    $input = $defaultInout;
 }
 
 
@@ -35,7 +36,7 @@ if (is_numeric($input)) {
     }
     $subtitle = $input;
     $dateList[] = [$res->getTimestamp(), 'Timestamp'];
-    if ($input == 'now') {
+    if ($input == $defaultInout) {
         $dateList = array_merge($dateList, formatDate($res));
     }
 }
