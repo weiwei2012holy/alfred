@@ -57,7 +57,7 @@ class Random
     }
 
 
-    public function randomString(string ...$inputs): string
+    private function randomString(string ...$inputs): string
     {
         $seed = implode('', $inputs);
         $seedLen = strlen($seed);
@@ -68,12 +68,10 @@ class Random
             $res .= $inputs[$i][mt_rand(0, strlen($inputs[$i]) - 1)];
             $leftSize--;
         }
-
         while ($leftSize > 0) {
             $rd = mt_rand();
             do {
                 $res .= $seed[$rd % $seedLen];
-//                $res .= $inputs[][$rd % $seedLen];
                 $leftSize--;
                 if ($leftSize <= 0) {
                     break;
