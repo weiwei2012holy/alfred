@@ -11,28 +11,43 @@ use Alfred\Workflows\Workflow;
 
 $workflow = new Workflow();
 
-$input = implode(" ",$workflow->arguments());
+$input = implode(" ", $workflow->arguments());
+
 
 if ($input == "") {
     $input = "now";
 }
-date_default_timezone_set('Asia/Shanghai');
 
-$res = "";
+
+$tz = 'Asia/Shanghai';
+date_default_timezone_set($tz);
+
+
+$v1 = '';
 if (is_numeric($input)) {
-    $res = date("Y-m-d H:i:s", $input);
+    $res = \Carbon\Carbon::createFromTimestamp($input);
+    $dateList[] = [$res->toDateTimeString(), ''];
+    $dateList[] = [$res->toIso8601String(), 'Iso8601'];
+    $dateList[] = [$res->toIso8601ZuluString(), 'Iso8601Zulu'];
+    $subtitle = $input;
+
 } else {
-    $res = strtotime($input);
+    $res = \Carbon\Carbon::parse($input);
     if (!$res) {
         $res = "无效的日期字符串";
     }
+    $subtitle = $input;
+    $dateList[] = [$res->getTimestamp(), ''];
 }
 
-$workflow->item()
-    ->title($res)
-    ->subtitle($input)
-    ->icon('date-res.png')
-    ->copy($res)//在列表中使用 ⌘C 复制操作的值
-    ->variable("date", $res);//设置变量后，Alfre可以通过{var:var_name}来获取，比如复制剪切板
+foreach ($dateList as [$v, $type]) {
+    $workflow->item()
+        ->title($v)
+        ->subtitle($subtitle . ' ' . $type)
+        ->icon('date-res.png')
+        ->copy($v)//在列表中使用 ⌘C 复制操作的值
+        ->variable("date", $v);//设置变量后，Alfre可以通过{var:var_name}来获取，比如复制剪切板
+}
+
 
 return $workflow->output();

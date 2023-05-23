@@ -1,7 +1,8 @@
 {
   "require": {
     "php": ">=7.4.0",
-    "joetannenbaum/alfred-workflow": "^1.0"
+    "joetannenbaum/alfred-workflow": "^1.0",
+    "nesbot/carbon": "^2.66"
   },
   "autoload": {
     "files": [
