@@ -26,18 +26,18 @@ date_default_timezone_set($tz);
 $v1 = '';
 if (is_numeric($input)) {
     $res = \Carbon\Carbon::createFromTimestamp($input);
-    $dateList[] = [$res->toDateTimeString(), ''];
-    $dateList[] = [$res->toIso8601String(), 'Iso8601'];
-    $dateList[] = [$res->toIso8601ZuluString(), 'Iso8601Zulu'];
+    $dateList = formatDate($res);
     $subtitle = $input;
-
 } else {
     $res = \Carbon\Carbon::parse($input);
     if (!$res) {
         $res = "无效的日期字符串";
     }
     $subtitle = $input;
-    $dateList[] = [$res->getTimestamp(), ''];
+    $dateList[] = [$res->getTimestamp(), 'Timestamp'];
+    if ($input == 'now') {
+        $dateList = array_merge($dateList, formatDate($res));
+    }
 }
 
 foreach ($dateList as [$v, $type]) {
@@ -51,3 +51,11 @@ foreach ($dateList as [$v, $type]) {
 
 
 return $workflow->output();
+
+function formatDate($res): array
+{
+    $dateList[] = [$res->toDateTimeString(), ''];
+    $dateList[] = [$res->toIso8601String(), 'Iso8601'];
+    $dateList[] = [$res->toIso8601ZuluString(), 'Iso8601Zulu'];
+    return $dateList;
+}
