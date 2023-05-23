@@ -44,7 +44,7 @@ foreach ($dateList as [$v, $type]) {
     $workflow->item()
         ->title($v)
         ->subtitle($subtitle . ' ' . $type)
-        ->icon('date-res.png')
+//        ->icon('date-res.png')
         ->copy($v)//在列表中使用 ⌘C 复制操作的值
         ->variable("date", $v);//设置变量后，Alfre可以通过{var:var_name}来获取，比如复制剪切板
 }
