@@ -1,0 +1,14 @@
+[
+    {
+        "title": "var-SCREAMING_SNAKE_CASE",
+        "prompt": "将变量名称替换为 SCREAMING_SNAKE_CASE 风格"
+    },
+    {
+        "title": "var-camelCase",
+        "prompt": "将变量名称替换为 camelCase 风格"
+    },
+    {
+        "title": "var-kebab-case",
+        "prompt": "将变量名称替换为 kebab-case 风格"
+    }
+]
